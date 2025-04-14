@@ -1,0 +1,48 @@
+/* src/components/ActionArea/ActionArea.module.css */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-bottom: 30px; /* Space below button */
+    animation: fadeInUp 0.6s 0.2s ease-out forwards; /* Animation */
+    opacity: 0;
+  }
+  
+  .analyzeButton {
+    padding: 14px 40px;
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--accent-text);
+    background-color: var(--accent-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+  
+  .analyzeButton:hover:not(:disabled) {
+    background-color: var(--accent-secondary);
+    box-shadow: 0 6px 16px var(--shadow-color);
+    transform: translateY(-2px);
+  }
+  
+  .analyzeButton:disabled {
+    background-color: var(--disabled-bg);
+    color: var(--disabled-text);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }

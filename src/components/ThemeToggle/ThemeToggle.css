@@ -1,0 +1,25 @@
+/* src/components/ThemeToggle/ThemeToggle.css */
+.theme-toggle-button {
+  background: none;
+  border: none;
+  color: var(--navbar-text-color); /* Use navbar text color variable */
+  cursor: pointer;
+  font-size: 1.4em; /* Adjust size as needed */
+  padding: 8px; /* Add padding for easier clicking */
+  border-radius: 50%; /* Make it circular */
+  line-height: 1; /* Prevent extra spacing */
+  display: flex; /* Center icon */
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-toggle-button:hover {
+  color: var(--accent-color-light); /* Use accent color on hover */
+  transform: scale(1.1) rotate(15deg);
+  background-color: rgba(128, 128, 128, 0.1); /* Subtle background on hover */
+}
+.light-mode .theme-toggle-button:hover {
+   color: var(--accent-color);
+   background-color: rgba(0, 0, 0, 0.05);
+}

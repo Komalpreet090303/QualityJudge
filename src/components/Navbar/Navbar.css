@@ -1,0 +1,194 @@
+/* src/components/Navbar/Navbar.css */
+.custom-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(45deg, #202020, #4c4949);
+  background-repeat: repeat-x;
+  color: white;
+  padding: 10px 30px;
+  /* position: sticky; */ /* REMOVED based on previous request */
+  /* top: 0; */
+  /* z-index: 1000; */
+  box-shadow: 0 2px 5px var(--shadow-color, rgba(0,0,0,0.3)); /* Use variable or fallback */
+  transition: background 0.4s ease, color 0.4s ease;
+  height: var(--navbar-height, 60px); /* Define or use fixed */
+}
+
+.custom-navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.custom-navbar-logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.custom-navbar-brand {
+  font-size: 1.8em;
+  font-weight: 300;
+  margin: 0;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.custom-navbar-brand strong {
+  font-weight: 700;
+}
+
+.custom-navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-navbar-item {
+  position: relative;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color:white !important;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-navbar-item:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+.light-mode .custom-navbar-item:hover {
+   background-color: rgba(0, 0, 0, 0.05);
+}
+
+.custom-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--secondary-bg, #45454a); /* Added fallback */
+  color: var(--text-color, white); /* Added fallback */
+  min-width: 200px;
+  box-shadow: 0 5px 15px var(--shadow-color, rgba(0,0,0,0.3));
+  z-index: 1001;
+  padding: 8px 0;
+  border-radius: 0 0 6px 6px;
+  border: 1px solid var(--card-border, rgba(255,255,255,0.15)); /* Added fallback */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.custom-navbar-item:hover .custom-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+.custom-dropdown a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--text-color, white); /* Added fallback */
+  font-size: 0.95em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.custom-dropdown a:hover {
+  background-color: var(--accent-color-bg, rgba(181, 56, 54, 0.2)); /* Added fallback */
+  color: var(--accent-color-light, #ff6b6b); /* Added fallback */
+}
+.light-mode .custom-dropdown a:hover {
+   color: var(--accent-color, #b53836); /* Added fallback */
+}
+
+.custom-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.custom-navbar-auth {
+  display: flex;
+  gap: 10px;
+}
+
+.custom-btn1 {
+  padding: 8px 18px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--navbar-text-color, white); /* Added fallback */
+  transition: all 0.3s ease;
+}
+
+.custom-btn1.login {
+   background-color: #b53836;
+   color: white !important;
+   border-color: #b53836; /* Ensure border matches */
+}
+
+.custom-btn1.login:hover {
+   /* Keeping your original hover for login */
+   background: var(--accent-color-bg, rgba(181, 56, 54, 0.2));
+   color: var(--accent-color, #b53836) !important; /* Use variable, keep important if needed */
+   border-color: var(--accent-color, #b53836);
+}
+
+.custom-btn1.signup {
+  background-color: var(--accent-color, #b53836); /* Use variable or fallback */
+  border-color: var(--accent-color, #b53836);
+  color: var(--button-text-color, white); /* Use variable or fallback */
+}
+
+.custom-btn1.signup:hover {
+   background-color: var(--accent-color-hover, #9e2f2d); /* Use variable or fallback */
+   border-color: var(--accent-color-hover, #9e2f2d);
+   transform: scale(1.03);
+}
+
+/* === VVV Add styles for logged-in state VVV === */
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-user-avatar {
+  width: 34px; /* Slightly larger */
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-primary, #b53836); /* Use accent border */
+  object-fit: cover;
+}
+
+.navbar-user-name {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: white;
+  white-space: nowrap;
+}
+
+/* Use .custom-btn1 base and add logout specific styles */
+.custom-btn1.logout {
+  border-color: var(--text-secondary, #a8aab1); /* Grey border */
+  color: var(--text-secondary, #a8aab1);
+  padding: 6px 14px; /* Adjust padding if desired */
+  background-color: transparent; /* Ensure no background initially */
+}
+.custom-btn1.logout:hover {
+  background-color: var(--error-bg, rgba(181, 56, 54, 0.15));
+  border-color: var(--accent-primary, #b53836);
+  color: var(--accent-primary, #b53836);
+  transform: none; /* Optional: remove transform from base .custom-btn1 if needed */
+}
+/* === ^^^ Add styles for logged-in state ^^^ === */
+
+/* Responsive adjustments */
+/* ... Keep existing responsive styles ... */
+@media (max-width: 992px) { /*...*/ }
+@media (max-width: 768px) { /*...*/ }

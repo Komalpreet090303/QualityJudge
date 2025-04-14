@@ -1,0 +1,65 @@
+/* src/components/ReferenceVideos/ReferenceVideos.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Equal height wrappers */
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 900px;
+    animation: fadeInUp 0.6s 0.2s ease-out backwards;
+  }
+  
+  .wrapper {
+    flex-basis: 300px;
+    flex-grow: 1;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    font-size: 0.85em; /* Smaller label */
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .video {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-grow: 1; /* Allow video to take space */
+    object-fit: cover;
+  }
+  .video:hover {
+     transform: scale(1.03);
+     box-shadow: 0 6px 18px var(--shadow-color);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+        gap: 25px;
+        margin-bottom: 40px;
+        /* Keep side-by-side if possible, wrap handles stacking */
+     }
+     .wrapper {
+         flex-basis: calc(50% - 15px); /* Aim for 2 columns */
+         min-width: 250px; /* Allow wrapping */
+     }
+  }
+  @media (max-width: 580px) {
+     .wrapper {
+         flex-basis: 100%; /* Stack fully on small screens */
+         max-width: 400px;
+     }
+  }

@@ -1,0 +1,22 @@
+.btn-group .btn {
+  
+  background-color: #b53836; 
+  border-color: #b53836;
+}
+.btn-group .btn:hover{
+  background-color: #b53836; 
+  border-color: #b53836;
+}
+.custom-no-focus:focus,
+.custom-no-focus:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #b53836 !important; /* Keep your custom background color */
+}
+#changed {
+  border-radius: 5px; /* Slightly rounded corners */
+   /* Ensures children respect the border-radius */
+  margin-top: 20px ;
+  margin-bottom: 32px;
+  background-color: #b53836;
+}

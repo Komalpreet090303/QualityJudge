@@ -1,0 +1,82 @@
+/* src/App.css */
+#root {
+  display: flex; /* Use flex on root for full height */
+  flex-direction: column;
+  min-height: 100vh; /* Ensure takes full viewport height */
+}
+
+.main-app-container { /* New wrapper inside root if needed, or apply directly to #root */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Take remaining space */
+}
+
+#content-section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Let this section grow to push footer down */
+  background: var(--primary-bg); /* Use variable from index.css */
+  color: var(--text-color); /* Use variable */
+  /* padding: 30px 20px 50px 20px;  */
+  
+  position: relative;
+  transition: background 0.4s ease; /* Match body transition */
+}
+#fixed{
+  background-image: linear-gradient(45deg, #202020, #4c4949); /* Linear gradient background */
+  background-repeat: repeat-x; /* Horizontal repeat */
+  color: white; /* Set the text color to white */
+}
+
+#heading{
+  margin-left: 150px; /* Keep or adjust as desired */
+  margin-bottom: 5px; /* Reduced bottom margin */
+  margin-top: 25px; /* Reduced top margin */
+  font-weight: 600; /* Slightly bolder */
+  font-size: 2em; /* Slightly larger heading */
+  color: white; /* Set the text color to white */
+}
+
+#heading_text{
+  margin-left:150px; /* Keep or adjust as desired */
+  color: white; /* Set the text color to white */
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 30px; /* Add space below text */
+}
+
+/* Center content potentially inside #content-section */
+.content-centerer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items like button/options horizontally */
+    width: 100%;
+}
+
+
+/* Responsive adjustments for heading/text */
+@media (max-width: 992px) {
+  #heading, #heading_text {
+    margin-left: 60px; /* Adjust margin */
+    margin-right: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  #content-section {
+     padding: 20px 15px 40px 15px;
+  }
+  #heading, #heading_text {
+    margin-left: 20px; /* Reduce margin on smaller screens */
+    margin-right: 20px;
+    text-align: center; /* Center text */
+  }
+   #heading {
+     font-size: 1.8em;
+     margin-top: 15px;
+   }
+   #heading_text {
+     font-size: 1em;
+     margin-bottom: 20px;
+   }
+}

@@ -1,0 +1,112 @@
+/* ResultsDisplay.css */
+.results-container {
+    background-color: rgba(0, 0, 0, 0.3); /* Dark background */
+    border-radius: 8px;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 800px;
+    width: 90%;
+    color: #f0f0f0;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .results-container h3 {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+  
+  /* Loading State */
+  .results-container.loading {
+    color: #ffffff;
+  }
+  .results-container.loading .fa-spinner {
+    color: #b53836; /* Accent color for spinner */
+    margin-bottom: 15px;
+  }
+  .results-container.loading p {
+    font-size: 1.1em;
+  }
+  
+  /* Error State */
+  .results-container.error {
+    background-color: rgba(181, 56, 54, 0.15); /* Red tint background */
+    border-color: rgba(181, 56, 54, 0.5);
+    color: #ffdddd; /* Light red text */
+  }
+  .results-container.error .fa-exclamation-triangle {
+    color: #e74c3c; /* Bright red for icon */
+    margin-bottom: 10px;
+  }
+  .results-container.error h3 {
+    color: #ffffff;
+  }
+  
+  /* Success State */
+  .results-container.success {
+    background-color: rgba(40, 167, 69, 0.1); /* Green tint background */
+    border-color: rgba(40, 167, 69, 0.4);
+    color: #d4edda; /* Light green text */
+    text-align: left; /* Align text left for list */
+  }
+  .results-container.success .fa-check-circle {
+    color: #28a745; /* Green icon */
+    margin-bottom: 10px;
+     display: block; /* Make icon block for centering */
+     text-align: center;
+     font-size: 2.5em; /* Larger success icon */
+  }
+   .results-container.success h3 {
+     color: #ffffff;
+     text-align: center; /* Center success heading */
+   }
+  
+  .results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .results-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.05em;
+  }
+  .results-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .results-list strong {
+    color: #ffffff; /* White label */
+    font-weight: 600;
+    margin-right: 15px;
+  }
+  
+  .results-list span {
+    color: #e0e0e0; /* Slightly dimmer value text */
+  }
+  
+  
+  @media (max-width: 600px) {
+    .results-container {
+      padding: 20px;
+      width: 95%;
+    }
+     .results-list li {
+       flex-direction: column;
+       align-items: flex-start;
+       gap: 5px;
+     }
+  }
+  /* Add to ResultsDisplay.css */
+.results-container {
+    /* ... existing styles ... */
+    margin: 0 auto 25px auto; /* Center, add bottom margin */
+    width: 100%; /* Take width of parent */
+    max-width: 800px; /* Control width */
+    animation: fadeInUp 0.6s 0.1s ease-out forwards; /* Stagger animation slightly */
+    opacity: 0;
+}

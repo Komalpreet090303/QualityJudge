@@ -1,0 +1,130 @@
+/* src/components/Options/options.css */
+
+.options-container {
+    background-color: var(--secondary-bg); /* Use slightly different bg */
+    border-radius: 12px;
+    padding: 30px 35px; /* Adjust padding */
+    margin: 0 auto 25px auto; /* Removed top margin, added bottom */
+    max-width: 800px; /* Control width */
+    width: 100%; /* Take width of parent */
+    border: 1px solid var(--card-border);
+    color: var(--text-color);
+    box-shadow: 0 5px 15px var(--shadow-color); /* Refined shadow */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: fadeInUp 0.6s 0.1s ease-out forwards; /* Stagger animation */
+    opacity: 0; /* Start hidden */
+  }
+  
+  @keyframes fadeInUp { /* Ensure this exists if not defined globally */
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  
+  .options-header {
+    color: var(--text-color-heading);
+    font-size: 1.3em; /* Slightly smaller header */
+    font-weight: 600;
+    margin: 0 0 25px 0; /* Reset margin */
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .options-header .fa-wrench {
+    color: var(--accent-color);
+    font-size: 0.9em; /* Slightly smaller icon */
+  }
+  
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Adjust tile size */
+    gap: 18px; /* Adjust gap */
+    perspective: 1200px;
+  }
+  
+  .option-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px; /* Adjust padding */
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border); /* Changed to visible border */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out; /* Faster transition */
+    text-align: center;
+    position: relative;
+    color: var(--text-color-secondary);
+    min-height: 130px; /* Adjust height */
+    transform-style: preserve-3d;
+  }
+  
+  .option-tile:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+      border-color: transparent; /* Hide border when outline is visible */
+  }
+  
+  .option-tile:hover {
+    /* background-color: var(--tertiary-bg); Slightly lighter hover */
+    border-color: var(--accent-color);
+    transform: translateY(-5px) rotateX(5deg) rotateY(-3deg) scale(1.02); /* Subtler tilt */
+    box-shadow: 0 6px 16px var(--shadow-color);
+  }
+  
+  .option-tile.selected {
+    background-color: var(--accent-color-bg);
+    border-color: var(--accent-color);
+    color: var(--text-color-heading);
+    transform: none; /* Reset transform when selected */
+    box-shadow: none; /* Remove shadow when selected? Or keep subtle one */
+  }
+  
+  .option-tile.selected .option-icon {
+    color: var(--accent-color-light);
+  }
+  
+  .option-checkbox-hidden { /* Keep as is */ }
+  
+  .option-icon {
+    font-size: 2.5em; /* Adjust icon size */
+    margin-bottom: 12px;
+    color: var(--text-color-secondary);
+    transition: color 0.25s ease;
+  }
+  .option-icon svg { transition: filter 0.3s ease; }
+  .option-tile:hover .option-icon svg { filter: brightness(1.1); }
+  
+  
+  .option-label {
+    font-size: 0.95em; /* Adjust label size */
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.25s ease, font-weight 0.2s ease;
+  }
+  .option-tile.selected .option-label { font-weight: 600; }
+  
+  .option-checkmark {
+    /* Keep checkmark styles */
+    position: absolute; top: 10px; right: 10px; font-size: 1.3em;
+    color: var(--accent-color); opacity: 0; transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .option-tile.selected .option-checkmark { opacity: 1; transform: scale(1); }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .options-grid {
+      grid-template-columns: repeat(2, 1fr); /* Force 2 columns */
+      gap: 15px;
+    }
+    .option-tile { min-height: 120px; padding: 15px 8px; }
+    .option-icon { font-size: 2.2em; }
+    .option-label { font-size: 0.9em; }
+    .options-container { padding: 25px 20px; width: 100%; } /* Full width inside wrapper */
+    .options-header { font-size: 1.2em; }
+  }

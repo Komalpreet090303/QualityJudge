@@ -1,0 +1,41 @@
+/* calculateButton.css */
+
+.calculate-button-container {
+    margin-top: 10px; /* Space above the button */
+    margin-bottom: 30px; /* Space below the button */
+  }
+  
+  .calculate-btn {
+    padding: 12px 35px;
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #b53836; /* Your primary red accent */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+    box-shadow: 0 4px 10px rgba(181, 56, 54, 0.3); /* Add shadow */
+  }
+  
+  .calculate-btn:hover:not(:disabled) {
+    background-color: #9e2f2d; /* Darker red on hover */
+    box-shadow: 0 6px 12px rgba(181, 56, 54, 0.4);
+    transform: translateY(-2px); /* Slight lift */
+  }
+  
+  .calculate-btn:disabled {
+    background-color: #777; /* Greyed out when disabled */
+    color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  .calculate-btn .fa-spinner {
+    /* Styles specific to the spinner icon if needed */
+    font-size: 1em; /* Match text size */
+  }

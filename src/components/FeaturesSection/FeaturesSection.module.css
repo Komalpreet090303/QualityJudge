@@ -1,0 +1,99 @@
+/* src/components/FeaturesSection/FeaturesSection.module.css */
+
+/* Use theme variables defined in src/index.css */
+.featuresContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 30px; /* Space between cards */
+    width: 100%;
+    max-width: 1100px; /* Match content wrapper width or adjust */
+    margin: 0 auto 60px auto; /* Center and add space below */
+    padding: 0 10px; /* Add slight horizontal padding */
+    animation: fadeInUp 0.6s 0.3s ease-out backwards; /* Staggered animation */
+  }
+  
+  .featureCard {
+    background-color: var(--bg-secondary); /* Use secondary background */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    display: flex; /* Use flex for icon + text layout */
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between icon and text */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    overflow: hidden; /* In case of aggressive transforms */
+  }
+  
+  .featureCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+    border-color: var(--accent-primary);
+  }
+  
+  .iconWrapper {
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    color: var(--accent-primary);
+    font-size: 2.5em; /* Adjust icon size */
+    margin-top: 5px; /* Align icon slightly lower */
+    line-height: 1; /* Prevent extra line height */
+  }
+  
+  .textContent {
+    flex-grow: 1; /* Allow text content to take remaining space */
+  }
+  
+  .title {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: var(--text-heading);
+    margin: 0 0 10px 0;
+  }
+  
+  .description {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .link {
+    display: inline-block; /* Allow margin-top */
+    margin-top: 15px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--accent-primary);
+    text-decoration: none;
+  }
+  .link:hover {
+    color: var(--accent-secondary);
+    text-decoration: underline;
+  }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+      .featuresContainer {
+          grid-template-columns: 1fr; /* Stack to single column */
+          gap: 25px;
+          max-width: 500px; /* Adjust max-width for single column */
+          margin-bottom: 50px;
+      }
+      .featureCard {
+          padding: 20px;
+          gap: 15px;
+      }
+      .iconWrapper {
+          font-size: 2.2em;
+      }
+      .title {
+          font-size: 1.15em;
+      }
+      .description {
+          font-size: 0.9em;
+      }
+  }
+  
+  /* Animation (if not already defined globally) */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }

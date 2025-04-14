@@ -1,0 +1,113 @@
+/* src/index.css */
+
+/* Define CSS variables for colors */
+:root {
+  /* Dark Mode (Default) */
+  --primary-bg: linear-gradient(45deg, #1f1f1f, #474747);
+  --secondary-bg: rgba(0, 0, 0, 0.3);
+  --tertiary-bg: rgba(255, 255, 255, 0.05);
+  --card-bg: rgba(0, 0, 0, 0.2);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-color: #f0f0f0;
+  --text-color-secondary: #a0a0a0;
+  --text-color-heading: #ffffff;
+  --accent-color: #b53836;
+  --accent-color-hover: #9e2f2d;
+  --accent-color-light: #ff6b6b;
+  --accent-color-bg: rgba(181, 56, 54, 0.2);
+  --success-bg: rgba(40, 167, 69, 0.1);
+  --success-border: rgba(40, 167, 69, 0.4);
+  --success-icon: #28a745;
+  --success-text: #d4edda;
+  --error-bg: rgba(181, 56, 54, 0.15);
+  --error-border: rgba(181, 56, 54, 0.5);
+  --error-icon: #e74c3c;
+  --error-text: #ffdddd;
+  --disabled-bg: #555; /* Darker disabled */
+  --disabled-text: #888;
+  --navbar-bg: linear-gradient(45deg, #202020, #4c4949);
+  --navbar-text-color: #ffffff;
+  --button-text-color: #ffffff;
+  --footer-bg: linear-gradient(45deg, #202020, #4c4949);
+  --footer-text-color: #a0a0a0;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+.light-mode {
+  /* Light Mode Overrides */
+  --primary-bg: #f0f2f5; /* Light grey main background */
+  --secondary-bg: #ffffff; /* White for secondary elements */
+  --tertiary-bg: #f8f9fa; /* Slightly off-white */
+  --card-bg: #e9ecef; /* Lighter card background */
+  --card-border: #dee2e6; /* Standard light border */
+  --text-color: #343a40; /* Dark text */
+  --text-color-secondary: #6c757d; /* Grey text */
+  --text-color-heading: #212529; /* Black heading */
+  --accent-color: #b53836; /* Keep accent */
+  --accent-color-hover: #9e2f2d; /* Keep accent hover */
+  --accent-color-light: #c04848; /* Adjust if needed for light mode */
+  --accent-color-bg: rgba(181, 56, 54, 0.1); /* Lighter accent bg */
+  --success-bg: #d4edda; /* Light green bg */
+  --success-border: #c3e6cb;
+  --success-icon: #198754; /* Darker green icon */
+  --success-text: #0f5132; /* Dark green text */
+  --error-bg: #f8d7da; /* Light red bg */
+  --error-border: #f5c6cb;
+  --error-icon: #dc3545; /* Keep error icon color */
+  --error-text: #721c24; /* Dark red text */
+  --disabled-bg: #ced4da; /* Light grey disabled */
+  --disabled-text: #6c757d;
+  --navbar-bg: #ffffff; /* White navbar */
+  --navbar-text-color: #343a40; /* Dark navbar text */
+  --button-text-color: #ffffff; /* Keep button text white usually */
+  --footer-bg: #e9ecef; /* Light footer */
+  --footer-text-color: #6c757d;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Apply base styles using variables */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--text-color); /* Use variable */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  /* Apply background to body for full coverage */
+}
+
+/* Apply transitions for theme switching */
+body {
+  background: var(--primary-bg);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Optional: improve scrollbar */
+/* Works in WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 10px;
+  border: 2px solid var(--secondary-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+   background-color: var(--accent-color-hover);
+}
+/* Basic scrollbar styling for Firefox */
+/* body { scrollbar-color: var(--accent-color) var(--secondary-bg); } */
+
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color-heading);
+  transition: color 0.3s ease;
+}
