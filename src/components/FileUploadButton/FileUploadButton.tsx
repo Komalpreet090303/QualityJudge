@@ -5,13 +5,16 @@ import './FileUploadButton.css';
 
 interface FileUploadButtonProps {
   fileSelected: boolean;
+  setVideoFile: (file: File | null) => void;
   // Pass the actual File object up if needed for API call
   // setFile: (file: File | null) => void;
   // For now, using the boolean + localStorage logic from previous example:
   setFileSelected: (isSelected: boolean) => void;
+  
+
 }
 
-const FileUploadButton: React.FC<FileUploadButtonProps> = ({ fileSelected, setFileSelected }) => {
+const FileUploadButton: React.FC<FileUploadButtonProps> = ({ fileSelected,setVideoFile, setFileSelected }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -40,6 +43,8 @@ const FileUploadButton: React.FC<FileUploadButtonProps> = ({ fileSelected, setFi
     if (file) {
       localStorage.setItem("selectedFileName", file.name);
       setSelectedFileName(file.name);
+      setVideoFile(file);
+     console.log("hello");
       // Pass file object up if needed: setFile(file);
       setFileSelected(true); // Notify parent
     }
