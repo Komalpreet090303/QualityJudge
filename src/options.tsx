@@ -12,7 +12,10 @@ const AVAILABLE_OPTIONS: Option[] = [
   { id: 'tiltScore', label: 'Tilt Score', icon: 'fa-arrows-alt-h' },
   { id: 'shakinessScore', label: 'Shakiness Score', icon: 'fa-camera-retro' }, // Example icon
   { id: 'blurrinessScore', label: 'Blurriness Score', icon: 'fa-low-vision' }, // Example icon
-  { id: 'occlusion', label: 'Occlusion Detection', icon: 'fa-eye-slash' }, // Example icon
+  { id: 'Contrast', label: 'Contrast Score', icon: 'fa-adjust' },
+  { id: 'Burnt_Pixels', label: 'Burnt Pixel Score', icon: 'fa-fire' },
+  
+
 ];
 
 interface OptionsProps {
