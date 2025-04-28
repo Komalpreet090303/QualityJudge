@@ -103,7 +103,7 @@ function App() {
      
       try {
     
-        const API_ENDPOINT = 'http://localhost:8000/api/predict'; 
+        const API_ENDPOINT = 'https://qualityjudge-1.onrender.com/api/predict'; 
        
   
         const response = await fetch(API_ENDPOINT, {
