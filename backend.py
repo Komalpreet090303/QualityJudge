@@ -248,5 +248,4 @@ async def predict(video: UploadFile = File(...), features: str = Form(...)):
 
     return JSONResponse(content=results)
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8200)
+
