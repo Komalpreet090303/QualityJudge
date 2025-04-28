@@ -12,6 +12,8 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from scipy.signal import medfilt
 import cv2
 import ast
+import uvicorn
+
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
@@ -212,7 +214,8 @@ async def predict(video: UploadFile = File(...), features: str = Form(...)):
             prediction = intermediate_model.predict(input_data)
             results["shakinessScore"] = float(prediction[0][0])
 
-        if any(f in requested_features for f in ["tilt", "blurriness", "contrast", "brightness", "burntpixels"]):
+        if any(f in requested_features for f in ["tiltscore", "blurrinessscore", "contrast", "brightness", "burnt_pixel"]):
+            
             cap = cv2.VideoCapture(temp_video_path)
             tilt_scores, blurr_scores, contrast_scores, brightness_scores, burnt_scores = [], [], [], [], []
             while True:
@@ -244,3 +247,6 @@ async def predict(video: UploadFile = File(...), features: str = Form(...)):
         os.remove(temp_video_path)
 
     return JSONResponse(content=results)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8200)
