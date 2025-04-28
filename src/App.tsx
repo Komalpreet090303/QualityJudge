@@ -69,24 +69,79 @@ function App() {
 
 
   // API Call Simulation (Keep existing)
-  const handleCalculate = useCallback(async () => {
-     setError(null); setResults(null);
-     // Use videoFile state here if implemented
-     if (!videoFile && !fileName) { setError("No video file selected."); return; } // Check both maybe
-     const selectedFeatures = Object.entries(options).filter(([k, v]) => v).map(([k]) => k);
-     if (selectedFeatures.length === 0) { setError("Please select parameters."); return; }
-     setIsLoading(true);
-     console.log("Calculating for file:", fileName); // Or videoFile.name
-     console.log("Selected features:", selectedFeatures);
-     // Replace mock with fetch call using 'videoFile' if available
-     await new Promise(resolve => setTimeout(resolve, 1500));
-     try { /* ... API call simulation ... */
-         const mockResults: Record<string, string | number> = {};
-         selectedFeatures.forEach(f => mockResults[f] = (Math.random()*10).toFixed(1));
-         setResults(mockResults);
-     } catch (err:any) { setError(err.message); }
-     finally { setIsLoading(false); }
-  }, [options, fileName, fileSelected, videoFile]); // Add videoFile dependency
+    // --- VVV THIS IS WHERE YOU INTEGRATE YOUR API CALL VVV ---
+    const handleCalculate = useCallback(async () => {
+      setError(null);
+      setResults(null);
+  
+      // 1. --- Input Validation ---
+      if (!videoFile) {
+        setError("No video file selected. Please upload a video.");
+        return; 
+      }
+      const selectedFeatures = Object.entries(options)
+        .filter(([key, value]) => value === true) 
+        .map(([key]) => key); 
+  
+      if (selectedFeatures.length === 0) {
+        setError("Please select at least one parameter to analyze.");
+        return;
+      }
+  
+      setIsLoading(true); 
+  
+      console.log("Calling Prediction API for file:", videoFile.name);
+      console.log("Selected features:", selectedFeatures);
+  
+    
+      const formData = new FormData();
+
+      formData.append('video', videoFile, videoFile.name);
+    
+      formData.append('features', JSON.stringify(selectedFeatures));
+  
+     
+      try {
+    
+        const API_ENDPOINT = 'http://localhost:8000/api/predict'; 
+       
+  
+        const response = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+        });
+  
+        
+        if (!response.ok) {
+          console.log("nooooooooooooooooooooo")
+          let errorMsg = `API Error: ${response.status} ${response.statusText}`;
+          try {
+              const errorData = await response.json();
+              errorMsg = errorData.message || errorData.error || errorMsg;
+          } catch (e) {
+              
+          }
+          throw new Error(errorMsg);
+        }
+  
+        
+        const predictionResults = await response.json();
+        console.log('API Response Data:', predictionResults);
+  
+       
+        setResults(predictionResults);
+        setError(null); 
+  
+      } catch (err: any) {
+       
+        console.error("Prediction API call failed:", err);
+        setError(err.message || "Failed to analyze video. Please try again.");
+        setResults(null); 
+      } finally {
+       
+        setIsLoading(false);
+      }
+    }, [options, videoFile,fileName,fileSelected]);  // Add videoFile dependency
   const handleThemeChange = useCallback((isDark: boolean) => { /* ... */ }, []);
 
   // --- VVV Google Login/Logout Handlers VVV ---
@@ -187,6 +242,7 @@ function App() {
           {/* === Step 1: Upload === */}
           <FileUploadButton
             fileSelected={fileSelected}
+            setVideoFile={setVideoFile}
             // Pass the correct prop based on FileUploadButton's needs
             // setFileSelected={handleFileStateChange} // If using boolean handler
             setFileSelected={setFileSelected}  // If using File handler
@@ -223,7 +279,7 @@ function App() {
           )}
 
           {/* === Step 4: Results Display === */}
-          {(isLoading || error || results) && (
+          {((isLoading || error || results)&&fileSelected) && (
             <ResultsDisplay
                 isLoading={isLoading}
                 results={results}
