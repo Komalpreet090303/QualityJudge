@@ -6,9 +6,9 @@ from fastapi.responses import JSONResponse
 import shutil
 import os
 import numpy as np
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+# import tensorflow as tf
+# from tensorflow import keras
+# from tensorflow.keras.preprocessing.sequence import pad_sequences
 from scipy.signal import medfilt
 import cv2
 import ast
@@ -17,40 +17,40 @@ import uvicorn
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
-class TransformerBlock(tf.keras.layers.Layer):
-    def __init__(self, embed_dim, num_heads, ff_dim, rate=0.1, **kwargs):
-        super(TransformerBlock, self).__init__(**kwargs)
-        self.embed_dim = embed_dim
-        self.num_heads = num_heads
-        self.ff_dim = ff_dim
-        self.rate = rate
-        self.att = tf.keras.layers.MultiHeadAttention(num_heads=num_heads, key_dim=embed_dim)
-        self.ffn = tf.keras.Sequential([
-            tf.keras.layers.Dense(ff_dim, activation="relu"),
-            tf.keras.layers.Dense(embed_dim),
-        ])
-        self.layernorm1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
-        self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
-        self.dropout1 = tf.keras.layers.Dropout(rate)
-        self.dropout2 = tf.keras.layers.Dropout(rate)
+# class TransformerBlock(tf.keras.layers.Layer):
+#     def __init__(self, embed_dim, num_heads, ff_dim, rate=0.1, **kwargs):
+#         super(TransformerBlock, self).__init__(**kwargs)
+#         self.embed_dim = embed_dim
+#         self.num_heads = num_heads
+#         self.ff_dim = ff_dim
+#         self.rate = rate
+#         self.att = tf.keras.layers.MultiHeadAttention(num_heads=num_heads, key_dim=embed_dim)
+#         self.ffn = tf.keras.Sequential([
+#             tf.keras.layers.Dense(ff_dim, activation="relu"),
+#             tf.keras.layers.Dense(embed_dim),
+#         ])
+#         self.layernorm1 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
+#         self.layernorm2 = tf.keras.layers.LayerNormalization(epsilon=1e-6)
+#         self.dropout1 = tf.keras.layers.Dropout(rate)
+#         self.dropout2 = tf.keras.layers.Dropout(rate)
 
-    def call(self, inputs, training=False, **kwargs):
-        attn_output = self.att(inputs, inputs)
-        attn_output = self.dropout1(attn_output, training=training)
-        out1 = self.layernorm1(inputs + attn_output)
-        ffn_output = self.ffn(out1)
-        ffn_output = self.dropout2(ffn_output, training=training)
-        return self.layernorm2(out1 + ffn_output)
+#     def call(self, inputs, training=False, **kwargs):
+#         attn_output = self.att(inputs, inputs)
+#         attn_output = self.dropout1(attn_output, training=training)
+#         out1 = self.layernorm1(inputs + attn_output)
+#         ffn_output = self.ffn(out1)
+#         ffn_output = self.dropout2(ffn_output, training=training)
+#         return self.layernorm2(out1 + ffn_output)
 
-    def get_config(self):
-        config = super(TransformerBlock, self).get_config()
-        config.update({
-            "embed_dim": self.embed_dim,
-            "num_heads": self.num_heads,
-            "ff_dim": self.ff_dim,
-            "rate": self.rate,
-        })
-        return config
+#     def get_config(self):
+#         config = super(TransformerBlock, self).get_config()
+#         config.update({
+#             "embed_dim": self.embed_dim,
+#             "num_heads": self.num_heads,
+#             "ff_dim": self.ff_dim,
+#             "rate": self.rate,
+#         })
+#         return config
 
 def motion_analysis(video_path, std_width=720, std_height=480):
     cap = cv2.VideoCapture(video_path)
@@ -117,15 +117,15 @@ def psiv(input_video, std_width=720, std_height=480):
     MTF = (1 / nFrames) * np.sum(diff_tilt)
     return MPF, MTF, diff_pan, diff_tilt, nFrames, fps
 
-def process_video(video_path, max_seq_length, std_width=720, std_height=480):
-    result = psiv(video_path, std_width, std_height)
-    if result is None:
-        raise ValueError("Error processing video: " + video_path)
-    _, _, pan, tilt, nFrames, fps = result
-    pan_padded = pad_sequences([pan], maxlen=max_seq_length, padding='post', dtype='float32')
-    tilt_padded = pad_sequences([tilt], maxlen=max_seq_length, padding='post', dtype='float32')
-    sequence_input = np.stack((pan_padded, tilt_padded), axis=-1)
-    return sequence_input
+# def process_video(video_path, max_seq_length, std_width=720, std_height=480):
+#     result = psiv(video_path, std_width, std_height)
+#     if result is None:
+#         raise ValueError("Error processing video: " + video_path)
+#     _, _, pan, tilt, nFrames, fps = result
+#     pan_padded = pad_sequences([pan], maxlen=max_seq_length, padding='post', dtype='float32')
+#     tilt_padded = pad_sequences([tilt], maxlen=max_seq_length, padding='post', dtype='float32')
+#     sequence_input = np.stack((pan_padded, tilt_padded), axis=-1)
+#     return sequence_input
 
 def fix_image_size(img, size=(224, 224)):
     return cv2.resize(img, size)
@@ -177,13 +177,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-with keras.utils.custom_object_scope({'TransformerBlock': TransformerBlock}):
-    loaded_model = keras.models.load_model("model1.keras")
+# with keras.utils.custom_object_scope({'TransformerBlock': TransformerBlock}):
+#     loaded_model = keras.models.load_model("model1.keras")
 
-intermediate_model = keras.Model(
-    inputs=loaded_model.input,
-    outputs=loaded_model.output
-)
+# intermediate_model = keras.Model(
+#     inputs=loaded_model.input,
+#     outputs=loaded_model.output
+# )
 
 max_seq_length = 2263
 
@@ -209,10 +209,10 @@ async def predict(video: UploadFile = File(...), features: str = Form(...)):
     results = {}
 
     try:
-        if "shakinessscore" in requested_features:
-            input_data = process_video(temp_video_path, max_seq_length)
-            prediction = intermediate_model.predict(input_data)
-            results["shakinessScore"] = float(prediction[0][0])
+        # if "shakinessscore" in requested_features:
+        #     input_data = process_video(temp_video_path, max_seq_length)
+        #     prediction = intermediate_model.predict(input_data)
+        #     results["shakinessScore"] = float(prediction[0][0])
 
         if any(f in requested_features for f in ["tiltscore", "blurrinessscore", "contrast", "brightness", "burnt_pixel"]):
             
