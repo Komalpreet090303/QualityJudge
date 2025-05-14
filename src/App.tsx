@@ -103,7 +103,7 @@ function App() {
      
       try {
     
-        const API_ENDPOINT = 'https://btp-backend-fi7b.onrender.com/api/predict'; 
+        const API_ENDPOINT = 'http://117.203.116.142:8000/api/predict'; 
        
   
         const response = await fetch(API_ENDPOINT, {
